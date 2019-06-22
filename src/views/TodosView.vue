@@ -23,10 +23,13 @@
         </TabItem>
       </div>
       <div class="todos-view__content fill-height">
-        <TodosList
-          v-if="visibleTodos.length"
-          :todos="visibleTodos"
-        />
+        <template v-if="visibleTodos.length">
+          <TodoItem
+            v-for="todo in visibleTodos"
+            :key="todo.id"
+            :todo="todo"
+          />
+        </template>
         <div
           v-else
           class="todos-view__message"
@@ -43,14 +46,14 @@ import { mapActions, mapGetters } from 'vuex'
 
 import TabItem from '@/components/TabItem'
 import TodoAdd from '@/components/TodoAdd'
-import TodosList from '@/components/TodosList'
+import TodoItem from '@/components/TodoItem'
 
 export default {
   name: 'TodosView',
   components: {
     TabItem,
     TodoAdd,
-    TodosList,
+    TodoItem,
   },
   data () {
     return {
