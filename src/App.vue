@@ -5,9 +5,7 @@
         class="logo"
         src="./assets/todos_logo.svg"
       >
-      <div class="card fill-height">
-        <TodosView />
-      </div>
+      <TodosView />
       <InputButton
         class="container__action"
         @click="getTodos"
@@ -15,47 +13,24 @@
         Load Sample Todos
       </InputButton>
     </div>
-    <Dialog v-model="isActiveTodo">
-      <TodoEdit />
-    </Dialog>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 
-import Dialog from '@/components/Dialog'
 import InputButton from '@/components/InputButton'
-import TodoEdit from '@/components/TodoEdit'
 import TodosView from './views/TodosView.vue'
 
 export default {
   name: 'App',
   components: {
-    Dialog,
     InputButton,
-    TodoEdit,
     TodosView,
-  },
-  computed: {
-    ...mapGetters([
-      'hasActiveTodo',
-    ]),
-    isActiveTodo: {
-      get () {
-        return this.hasActiveTodo
-      },
-      set (value) {
-        this.setActiveTodo(value)
-      },
-    },
   },
   methods: {
     ...mapActions([
       'getTodos',
-    ]),
-    ...mapMutations([
-      'setActiveTodo',
     ]),
   },
 }
