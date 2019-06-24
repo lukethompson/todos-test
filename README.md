@@ -2,6 +2,10 @@
 Created for a technical test. Used vue-cli 3 to scaffold the app.
 
 ## Project setup
+
+Requires node.js and npm or yarn
+
+### Install dependencies
 ```
 npm run install
 ```
