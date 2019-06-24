@@ -7,7 +7,7 @@ Requires node.js and npm or yarn
 
 ### Install dependencies
 ```
-npm run install
+npm install
 ```
 
 ### Compiles and hot-reloads for development
