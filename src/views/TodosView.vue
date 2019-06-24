@@ -1,5 +1,5 @@
 <template>
-  <div class="todos-view fill-height">
+  <div class="todos-view card fill-height">
     <TodoAdd />
     <div
       v-if="!hasTodos"
@@ -38,12 +38,17 @@
         </div>
       </div>
     </template>
+    <Dialog v-model="isActiveTodo">
+      <TodoEdit />
+    </Dialog>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
+import Dialog from '@/components/Dialog'
+import TodoEdit from '@/components/TodoEdit'
 import TabItem from '@/components/TabItem'
 import TodoAdd from '@/components/TodoAdd'
 import TodoItem from '@/components/TodoItem'
@@ -51,8 +56,10 @@ import TodoItem from '@/components/TodoItem'
 export default {
   name: 'TodosView',
   components: {
+    Dialog,
     TabItem,
     TodoAdd,
+    TodoEdit,
     TodoItem,
   },
   data () {
@@ -64,23 +71,26 @@ export default {
     ...mapGetters([
       'remainingTodos',
       'completedTodos',
+      'hasActiveTodo',
       'hasTodos',
     ]),
+    isActiveTodo: {
+      get () {
+        return this.hasActiveTodo
+      },
+      set (value) {
+        this.setActiveTodo(value)
+      },
+    },
     visibleTodos () {
       return this.activeTab === 'current'
         ? this.remainingTodos
         : this.completedTodos
     },
   },
-  mounted () {
-    // Would usually get todos here
-    // this.getTodos()
-  },
   methods: {
-    ...mapActions([
-      'deleteTodo',
-      'getTodos',
-      'updateTodo',
+    ...mapMutations([
+      'setActiveTodo',
     ]),
   },
 }
